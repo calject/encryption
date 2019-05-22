@@ -1,0 +1,24 @@
+{
+    "name": "chanlly/encryption",
+    "description":"encryption",
+    "authors": [
+        {
+            "name": "沧澜",
+            "email": "lryhuimeng@163.cn"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "ext-openssl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chanlly\\Encryption\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Chanlly\\Test\\": "test"
+        }
+    }
+}
