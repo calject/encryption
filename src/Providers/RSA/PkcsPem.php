@@ -33,8 +33,8 @@ class PkcsPem extends AbsRsaEncryption
         $maxlength = $this->getMaxEncryptBlockSize($key);
         $output = ''; $encrypted = '';
         while ($str) {
-            $str = substr($str, $maxlength);
             $encryptFunc(substr($str, 0, $maxlength), $encrypted, $key);
+            $str = substr($str, $maxlength);
             $output .= $encrypted;
         }
         return $this->coding()->encode($output);
@@ -54,8 +54,8 @@ class PkcsPem extends AbsRsaEncryption
         $str = $this->coding()->decode($str);
         $output = ''; $decrypted = '';
         while ($str) {
-            $str = substr($str, $maxlength);
             $decryptFunc(substr($str, 0, $maxlength), $decrypted, $key);
+            $str = substr($str, $maxlength);
             $output .= $decrypted;
         }
         return $output;

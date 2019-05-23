@@ -95,12 +95,13 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
      * @param mixed $data
      * @param mixed|null $opts
      * @return string
-     * @throws AbsException
      * @throws IoException
+     * @throws RsaException
      */
-    public function sign($data, $opts = OPENSSL_ALGO_SHA1): string
+    public function sign($data, $opts = null): string
     {
-        return $this->signCoding()->encode(openssl_sign($data, $sign, $this->getPriKey(), $opts));
+        openssl_sign($data, $sign, $this->getPriKey(), $opts ?? OPENSSL_ALGO_SHA1);
+        return $this->signCoding()->encode($sign);
     }
     
     /**
@@ -111,9 +112,9 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
      * @throws IoException
      * @throws RsaException
      */
-    public function verify($data, string $sign, $opts = OPENSSL_ALGO_SHA1): bool
+    public function verify($data, string $sign, $opts = null): bool
     {
-        return (bool)openssl_verify($data, $this->signCoding()->decode($sign), $this->getPubKey(), $opts);
+        return (bool)openssl_verify($data, $this->signCoding()->decode($sign), $this->getPubKey(), $opts ?? OPENSSL_ALGO_SHA1);
     }
     
     /*---------------------------------------------- protected handle ----------------------------------------------*/
@@ -150,9 +151,9 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
     final protected function getRsaCryptFunc(string $key): string
     {
         if ($key === self::KEY_ENCRYPT) {
-            return $this->isModelOpposite() ? 'openssl_public_encrypt' : 'openssl_private_encrypt';
+            return $this->isModelOpposite() ? 'openssl_private_encrypt' : 'openssl_public_encrypt';
         } else {
-            return $this->isModelOpposite() ? 'openssl_private_decrypt' : 'openssl_public_decrypt';
+            return $this->isModelOpposite() ? 'openssl_public_decrypt' : 'openssl_private_decrypt';
         }
     }
     
@@ -190,7 +191,7 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
      * @throws IoException
      * @throws RsaException
      */
-    final protected function getPubKey($type = Openssl::FILE_KEY, Closure $getKey = null): string
+    final protected function getPubKey($type = Openssl::FILE_KEY, Closure $getKey = null)
     {
         if (!$pubKey = &$this->pubKey) {
             $pubContent = $this->reading()->readPubFile($this->pubFilePath);
@@ -216,14 +217,16 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
     final protected function getPriKey($type = Openssl::FILE_KEY, Closure $getKey = null)
     {
         if (!$priKey = &$this->priKey) {
-            $priContent = $this->reading()->readPriFile($this->pubFilePath);
+            $priContent = $this->reading()->readPriFile($this->priFilePath);
             if ($type == Openssl::FILE_PKEY) {
                 $priKey = openssl_pkey_get_private($priContent);
             } else if ($type == Openssl::FILE_PKCS12) {
                 $priKeys = [];
                 openssl_pkcs12_read($priContent, $priKeys, $this->priPassword);
                 if (isset($priKeys) && isset($priKeys["pkey"])) {
-                    $priKey = $priKeys["pkey"];
+                    $pKey = $priKeys["pkey"];
+                    $getKey && $resGetKey = call_user_func($getKey, $pKey);
+                    $priKey = $resGetKey ?? openssl_get_privatekey($pKey);
                 }
             } else {
                 $getKey && $resGetKey = call_user_func($getKey, $priContent);
@@ -315,8 +318,8 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
      */
     public function __destruct()
     {
-        openssl_free_key($this->pubKey);
-        openssl_free_key($this->priKey);
+        is_resource($this->pubKey) && openssl_free_key($this->pubKey);
+        is_resource($this->priKey) && openssl_free_key($this->priKey);
     }
     
     

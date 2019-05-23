@@ -23,9 +23,9 @@ $key = 'R09w0jmo';
 $aes = new AES($key,  Openssl::CODING_BASE64, 'AES-256-ECB');
 $str = 'test aes ecb encryption, coding with base64.';
 $encrypted = $aes->encrypt($str);
-var_dump("encrypt str: " . $encrypted);
+printf("encrypt str: " . $encrypted);
 echo PHP_EOL . '</br>';
-var_dump("decrypt str: " . $aes->decrypt($encrypted));
+printf("decrypt str: " . $aes->decrypt($encrypted));
 echo PHP_EOL . '</br>';
 echo PHP_EOL . '</br>';
 
@@ -34,9 +34,9 @@ echo PHP_EOL . '</br>';
 $aes = new AES($key,  Openssl::CODING_HEX_BIN, 'AES-256-ECB');
 $str = 'test aes ecb encryption, coding with hexbin.';
 $encrypted = $aes->encrypt($str);
-var_dump("encrypt str: " . $encrypted);
+printf("encrypt str: " . $encrypted);
 echo PHP_EOL . '</br>';
-var_dump("decrypt str: " . $aes->decrypt($encrypted));
+printf("decrypt str: " . $aes->decrypt($encrypted));
 echo PHP_EOL . '</br>';
 echo PHP_EOL . '</br>';
 
@@ -47,9 +47,9 @@ echo PHP_EOL . '</br>';
 $aes = new AES($key, Openssl::PKCS7_PADDING | Openssl::CODING_BASE64, 'AES-256-ECB');
 $str = 'test aes ecb encryption, coding with base64, key padding with pkcs7 padding.';
 $encrypted = $aes->encrypt($str);
-var_dump("encrypt str: " . $encrypted);
+printf("encrypt str: " . $encrypted);
 echo PHP_EOL . '</br>';
-var_dump("decrypt str: " . $aes->decrypt($encrypted));
+printf("decrypt str: " . $aes->decrypt($encrypted));
 echo PHP_EOL . '</br>';
 echo PHP_EOL . '</br>';
 

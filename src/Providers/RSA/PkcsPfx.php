@@ -35,7 +35,7 @@ class PkcsPfx extends AbsRsaEncryption
         $str = $this->coding()->encode($str);
         $strLen = strlen($str); $encryptPos = 0; $output = ''; $encrypted = '';
         while ($encryptPos < $strLen) {
-            $encryptFunc(substr($str, $encryptPos, $maxlength), $encrypted, $this->getPubKey());
+            $encryptFunc(substr($str, $encryptPos, $maxlength), $encrypted, $key);
             $output .= bin2hex($encrypted);
             $encryptPos += $maxlength;
         }
@@ -52,12 +52,11 @@ class PkcsPfx extends AbsRsaEncryption
     {
         $key = $this->getRsaCryptKey(self::KEY_DECRYPT, Openssl::FILE_PKCS12);
         $decryptFunc = $this->getRsaCryptFunc(self::KEY_DECRYPT);
-        $maxlength = $this->getMaxDecryptBlockSize($key);
         $strLen = strlen($str); $decryptPos = 0; $output = ''; $decrypted = '';
         while ($decryptPos < $strLen) {
-            $decryptFunc(hex2bin(substr($str, $decryptPos, $maxlength)), $decrypted, $this->getPriKey());
+            $decryptFunc(hex2bin(substr($str, $decryptPos, 256)), $decrypted, $key);
             $output .= $decrypted;
-            $decryptPos += $maxlength;
+            $decryptPos += 256;
         }
         return $this->coding()->decode($output);
     }
