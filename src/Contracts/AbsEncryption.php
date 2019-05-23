@@ -10,15 +10,12 @@ namespace Chanlly\Encryption\Contracts;
 
 
 use Chanlly\Encryption\Components\Coding\Base64Coding;
-use Chanlly\Encryption\Components\Coding\HexBinCoding;
-use Chanlly\Encryption\Components\Coding\NoCoding;
+use Chanlly\Encryption\Components\Padding\NoPadding;
+use Chanlly\Encryption\Config\OpensslMap;
+use Chanlly\Encryption\Constants\Openssl;
 
 abstract class AbsEncryption
 {
-    /* ======== 编码格式常量定义 ======== */
-    const CODING_NO = 0;
-    const CODING_BASE64 = 1;
-    const CODING_HEX_BIN = 2;
     
     /**
      * @var ICoding
@@ -28,17 +25,40 @@ abstract class AbsEncryption
     /**
      * @var int
      */
-    protected $codingMode = 1;
+    protected $codingMode = Openssl::CODING_BASE64;
+    
+    /**
+     * @var IPadding
+     */
+    protected $padding;
+    
+    /**
+     * @var int
+     */
+    protected $paddingMode = Openssl::NO_PADDING;
     
     /**
      * @return ICoding
      */
     final protected function coding(): ICoding
     {
-        if (!$coding = $this->coding) {
-            $coding = $this->getByCodingMode($this->codingMode);
+        if (!$coding = &$this->coding) {
+            $class = OpensslMap::CODING_MAP[$this->codingMode] ?? Base64Coding::class;
+            $coding = new $class;
         }
         return $coding;
+    }
+    
+    /**
+     * @return IPadding
+     */
+    final protected function padding(): IPadding
+    {
+        if (!$padding = &$this->padding) {
+            $class = OpensslMap::PADDING_MAP[$this->paddingMode] ?? NoPadding::class;
+            $padding = new $class;
+        }
+        return $padding;
     }
     
     /**
@@ -62,20 +82,23 @@ abstract class AbsEncryption
     }
     
     /**
-     * @param int $codingMode self::CODING_XXX sample: self::CODING_NO
-     * @return ICoding
+     * @param IPadding $padding
+     * @return $this
      */
-    final protected function getByCodingMode(int $codingMode): ICoding
+    public function setPadding(IPadding $padding)
     {
-        switch ($codingMode) {
-            case 0:
-                return new NoCoding();
-            case 1:
-                return new Base64Coding();
-            case 2:
-                return new HexBinCoding();
-            default:
-                return new Base64Coding();
-        }
+        $this->padding = $padding;
+        return $this;
     }
+    
+    /**
+     * @param int $paddingMode
+     * @return $this
+     */
+    public function setPaddingMode(int $paddingMode)
+    {
+        $this->paddingMode = $paddingMode;
+        return $this;
+    }
+    
 }

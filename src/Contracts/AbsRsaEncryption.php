@@ -10,7 +10,7 @@ namespace Chanlly\Encryption\Contracts;
 
 
 use Chanlly\Encryption\Components\Reading\FileReading;
-use Chanlly\Encryption\Constants\Constant;
+use Chanlly\Encryption\Constants\Openssl;
 use Chanlly\Encryption\Exceptions\IoException;
 use Chanlly\Encryption\Exceptions\RsaException;
 use Closure;
@@ -134,7 +134,7 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
      * @throws IoException
      * @throws RsaException
      */
-    protected function getRsaCryptKey(string $key, $opt = Constant::FILE_KEY)
+    protected function getRsaCryptKey(string $key, $opt = Openssl::FILE_KEY)
     {
         if ($key === self::KEY_ENCRYPT) {
             return $this->isModelOpposite() ? $this->getPriKey($opt) : $this->getPubKey($opt);
@@ -190,11 +190,11 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
      * @throws IoException
      * @throws RsaException
      */
-    final protected function getPubKey($type = Constant::FILE_KEY, Closure $getKey = null): string
+    final protected function getPubKey($type = Openssl::FILE_KEY, Closure $getKey = null): string
     {
         if (!$pubKey = &$this->pubKey) {
             $pubContent = $this->reading()->readPubFile($this->pubFilePath);
-            if ($type == Constant::FILE_PKEY) {
+            if ($type == Openssl::FILE_PKEY) {
                 $pubKey = openssl_pkey_get_public($pubContent);
             } else {
                 $getKey && $resGetKey = call_user_func($getKey, $pubContent);
@@ -213,13 +213,13 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
      * @throws IoException
      * @throws RsaException
      */
-    final protected function getPriKey($type = Constant::FILE_KEY, Closure $getKey = null)
+    final protected function getPriKey($type = Openssl::FILE_KEY, Closure $getKey = null)
     {
         if (!$priKey = &$this->priKey) {
             $priContent = $this->reading()->readPriFile($this->pubFilePath);
-            if ($type == Constant::FILE_PKEY) {
+            if ($type == Openssl::FILE_PKEY) {
                 $priKey = openssl_pkey_get_private($priContent);
-            } else if ($type == Constant::FILE_PKCS12) {
+            } else if ($type == Openssl::FILE_PKCS12) {
                 $priKeys = [];
                 openssl_pkcs12_read($priContent, $priKeys, $this->priPassword);
                 if (isset($priKeys) && isset($priKeys["pkey"])) {

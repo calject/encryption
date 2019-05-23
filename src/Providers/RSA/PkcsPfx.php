@@ -8,7 +8,7 @@
 
 namespace Chanlly\Encryption\Providers\RSA;
 
-use Chanlly\Encryption\Constants\Constant;
+use Chanlly\Encryption\Constants\Openssl;
 use Chanlly\Encryption\Contracts\AbsRsaEncryption;
 use Chanlly\Encryption\Exceptions\IoException;
 use Chanlly\Encryption\Exceptions\RsaException;
@@ -29,7 +29,7 @@ class PkcsPfx extends AbsRsaEncryption
      */
     public function encrypt(string $str): string
     {
-        $key = $this->getRsaCryptKey(self::KEY_ENCRYPT, Constant::FILE_PKCS12);
+        $key = $this->getRsaCryptKey(self::KEY_ENCRYPT, Openssl::FILE_PKCS12);
         $encryptFunc = $this->getRsaCryptFunc(self::KEY_ENCRYPT);
         $maxlength = $this->getMaxEncryptBlockSize($key);
         $str = $this->coding()->encode($str);
@@ -50,7 +50,7 @@ class PkcsPfx extends AbsRsaEncryption
      */
     public function decrypt(string $str): string
     {
-        $key = $this->getRsaCryptKey(self::KEY_DECRYPT, Constant::FILE_PKCS12);
+        $key = $this->getRsaCryptKey(self::KEY_DECRYPT, Openssl::FILE_PKCS12);
         $decryptFunc = $this->getRsaCryptFunc(self::KEY_DECRYPT);
         $maxlength = $this->getMaxDecryptBlockSize($key);
         $strLen = strlen($str); $decryptPos = 0; $output = ''; $decrypted = '';
