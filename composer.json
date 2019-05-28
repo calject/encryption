@@ -18,7 +18,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Chanlly\\Test\\": "test"
+            "Chanlly\\Encryptio\\Test\\": "test"
         }
     }
 }
