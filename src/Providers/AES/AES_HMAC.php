@@ -51,6 +51,7 @@ class AES_HMAC extends AbsAesEncryption
      * @param string $str
      * @param mixed|null $opts
      * @return string
+     * @throws AesException
      * @throws Exception
      */
     public function encrypt(string $str, $opts = null): string
@@ -77,6 +78,7 @@ class AES_HMAC extends AbsAesEncryption
      * @param mixed|null $opts
      * @return string
      * @throws AesException
+     * @throws Exception
      */
     public function decrypt(string $str, $opts = null): string
     {
@@ -118,7 +120,6 @@ class AES_HMAC extends AbsAesEncryption
      *
      * @param string $payload
      * @return array
-     *
      * @throws AesException
      * @throws Exception
      */

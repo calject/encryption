@@ -7,6 +7,7 @@
  */
 
 use Chanlly\Encryption\Constants\Openssl;
+use Chanlly\Encryption\Exceptions\AesException;
 use Chanlly\Encryption\Providers\AES\AES_HMAC;
 
 require "../vendor/autoload.php";
@@ -25,6 +26,8 @@ try {
     $decrypt = $aes->decrypt($encrypt);
     dump($decrypt);
     
+} catch (AesException $e) {
+    dump('AesException:', $e);
 } catch (Exception $e) {
     dump($e);
 }
