@@ -24,7 +24,7 @@ class FileGetContentHelper
     {
         if (!file_exists($filePath)) {
             $error && $res = call_user_func($error, $filePath);
-            $isThrowException && IoException::throw("the $filePath file does not exist");
+            $isThrowException && IoException::throw("the $filePath file does not exist.");
             return $res ?? false;
         } else {
             return file_get_contents($filePath);

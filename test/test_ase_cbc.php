@@ -15,7 +15,7 @@ $key = 'R09w0jmo';
 $iv = '1234567890123456';
 
 /* ======== coding with Base64 ======== */
-$aes = new AES($key,  Openssl::CODING_BASE64, Openssl::AES_MODE_CBC, $iv);
+$aes = new AES($key,  Openssl::CODING_BASE64, Openssl::AES_MODE_CBC_128, $iv);
 $str = 'test aes cbc encryption, coding with base64.';
 $encrypted = $aes->encrypt($str);
 printf("encrypt str: " . $encrypted);
@@ -26,7 +26,7 @@ echo PHP_EOL . '</br>';
 
 
 /* ======== coding with HexBin ======== */
-$aes = new AES($key,  Openssl::CODING_HEX_BIN, Openssl::AES_MODE_CBC, $iv);
+$aes = new AES($key,  Openssl::CODING_HEX_BIN, Openssl::AES_MODE_CBC_128, $iv);
 $str = 'test aes cbc encryption, coding with hexbin.';
 $encrypted = $aes->encrypt($str);
 printf("encrypt str: " . $encrypted);
@@ -40,7 +40,7 @@ echo PHP_EOL . '</br>';
 /* ======== 如：java中Pkcs7Padding模式的Aes需要使用Openssl::PKCS7_PADDING ======== */
 
 /* ======== coding with Base64 ======== */
-$aes = new AES($key, Openssl::PKCS7_PADDING | Openssl::CODING_BASE64, Openssl::AES_MODE_CBC, $iv);
+$aes = new AES($key, Openssl::PKCS7_PADDING | Openssl::CODING_BASE64, Openssl::AES_MODE_CBC_128, $iv);
 $str = 'test aes cbc encryption, coding with base64, key padding with pkcs7 padding.';
 $encrypted = $aes->encrypt($str);
 printf("encrypt str: " . $encrypted);

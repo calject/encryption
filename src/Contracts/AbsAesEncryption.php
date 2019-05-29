@@ -54,7 +54,7 @@ abstract class AbsAesEncryption extends AbsEncryption implements IAesEncryption
      * @param string $iv
      * @param array $expand
      */
-    public function __construct(string $key, int $opts = Openssl::CODING_BASE64, $cipherMode = Openssl::AES_MODE_ECB, string $iv = "", ... $expand)
+    public function __construct(string $key, int $opts = Openssl::CODING_BASE64, $cipherMode = Openssl::AES_MODE_ECB_128, string $iv = "", ... $expand)
     {
         $this->key = $key;
         $this->opts = $opts;

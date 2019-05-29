@@ -9,7 +9,8 @@
     ],
     "require": {
         "php": "^7.0",
-        "ext-openssl": "*"
+        "ext-openssl": "*",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {
@@ -18,7 +19,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Chanlly\\Encryptio\\Test\\": "test"
+            "Chanlly\\Encryption\\Test\\": "test"
         }
     }
 }

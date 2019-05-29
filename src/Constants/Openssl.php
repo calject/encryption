@@ -66,8 +66,10 @@ interface Openssl
      * AES-256-XTS
      */
     /* ======== 默认常用模式定义 ======== */
-    const AES_MODE_ECB = 'AES-128-ECB';
-    const AES_MODE_CBC = 'AES-128-CBC';
+    const AES_MODE_ECB_128 = 'AES-128-ECB';
+    const AES_MODE_ECB_256 = 'AES-256-ECB';
+    const AES_MODE_CBC_128 = 'AES-128-CBC';
+    const AES_MODE_CBC_256 = 'AES-256-CBC';
     
     
 }
