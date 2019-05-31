@@ -46,7 +46,6 @@ try {
     echo PHP_EOL . '</br>';
     
 } catch (IoException | RsaException $e) {
-    // 此写法仅支持php 7.1以上的版本, 7.1以下修改为catch 2次
     echo "<pre>";
     printf($e);
 }
