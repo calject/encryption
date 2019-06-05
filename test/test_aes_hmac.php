@@ -8,6 +8,7 @@
 
 use Chanlly\Encryption\Encryption;
 use Chanlly\Encryption\Exceptions\AesException;
+use Chanlly\Encryption\Factories\AesHmacFactory;
 
 require "../vendor/autoload.php";
 
@@ -15,6 +16,8 @@ require "../vendor/autoload.php";
 $key = 'as9d8ajsd9asjdas';
 $iv = '1234567890123456';
 
+// $aes = AesHmacFactory::createAesCbc128($key, $iv);
+// $aes = Encryption::$aesHmac::createAesCbc128($key, $iv);
 $aes = Encryption::aesHmacFactory()::createAesCbc128($key, $iv);
 
 $data = 'test aes cbc 128 hmac .';

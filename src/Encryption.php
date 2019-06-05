@@ -14,12 +14,28 @@ use Chanlly\Encryption\Factories\RsaFactory;
 
 class Encryption
 {
+    
+    /**
+     * @var RsaFactory|string
+     */
+    public static $rsa = RsaFactory::class;
+    
+    /**
+     * @var AesFactory|string
+     */
+    public static $aes = AesFactory::class;
+    
+    /**
+     * @var AesHmacFactory|string
+     */
+    public static $aesHmac = AesHmacFactory::class;
+    
     /**
      * @return RsaFactory|string
      */
     public static function rsaFactory()
     {
-        return RsaFactory::class;
+        return static::$rsa;
     }
     
     /**
@@ -27,7 +43,7 @@ class Encryption
      */
     public static function aesFactory()
     {
-        return AesFactory::class;
+        return static::$aes;
     }
     
     /**
@@ -35,7 +51,7 @@ class Encryption
      */
     public static function aesHmacFactory()
     {
-        return AesHmacFactory::class;
+        return static::$aesHmac;
     }
     
 }

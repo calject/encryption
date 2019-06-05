@@ -10,6 +10,7 @@ use Chanlly\Encryption\Constants\Openssl;
 use Chanlly\Encryption\Encryption;
 use Chanlly\Encryption\Exceptions\IoException;
 use Chanlly\Encryption\Exceptions\RsaException;
+use Chanlly\Encryption\Factories\RsaFactory;
 
 require '../vendor/autoload.php';
 
@@ -17,6 +18,8 @@ $pubFile = __DIR__.'/resources/public.pem';
 $priFile = __DIR__.'/resources/private_p8.pem';
 
 // 设置编码格式，默认为 Openssl::CODING_BASE64 base64
+// $rsa = RsaFactory::createPkcs8($pubFile, $priFile, Openssl::CODING_HEX_BIN);
+// $rsa = Encryption::$rsa::createPkcs8($pubFile, $priFile, Openssl::CODING_HEX_BIN);
 $rsa = Encryption::rsaFactory()::createPkcs8($pubFile, $priFile, Openssl::CODING_HEX_BIN);
 
 $str = "test rsa encryption with pkcs8.";

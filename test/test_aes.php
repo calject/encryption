@@ -22,6 +22,7 @@ $key = 'R09w0jmo';
 
 /* ======== coding with Base64 ======== */
 // $aes = AesFactory::createAesEcb128($key);
+// $aes = Encryption::$aes::createAes($key, Openssl::CODING_BASE64, 'AES-256-ECB');
 $aes = Encryption::aesFactory()::createAes($key, Openssl::CODING_BASE64, 'AES-256-ECB');
 
 $str = 'test aes ecb encryption, coding with base64.';
@@ -34,6 +35,8 @@ echo PHP_EOL . '</br>';
 
 
 /* ======== coding with HexBin ======== */
+// $aes = AesFactory::createAes($key, Openssl::CODING_HEX_BIN, 'AES-256-ECB');
+// $aes = Encryption::$aes::createAes($key, Openssl::CODING_HEX_BIN, 'AES-256-ECB');
 $aes = Encryption::aesFactory()::createAes($key, Openssl::CODING_HEX_BIN, 'AES-256-ECB');
 $str = 'test aes ecb encryption, coding with hexbin.';
 $encrypted = $aes->encrypt($str);

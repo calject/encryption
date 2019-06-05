@@ -76,6 +76,21 @@ easy php encryption with RSA and AES in openssl
         * `createAesCbc128`
         * `createAesCbc256`
 
+* examples
+```$xslt
+# create aes encryption
+$aes = AesFactory::createAesEcb128($key);
+$aes = Encryption::$aes::createAes($key, Openssl::CODING_BASE64, 'AES-256-ECB');
+$aes = Encryption::aesFactory()::createAes($key, Openssl::CODING_BASE64, 'AES-256-ECB');
+
+# create rsa encryption
+// 设置编码格式，默认为 Openssl::CODING_BASE64 base64
+$rsa = RsaFactory::createPkcs8($pubFile, $priFile, Openssl::CODING_HEX_BIN);
+$rsa = Encryption::$rsa::createPkcs8($pubFile, $priFile, Openssl::CODING_HEX_BIN);
+$rsa = Encryption::rsaFactory()::createPkcs8($pubFile, $priFile, Openssl::CODING_HEX_BIN);
+```
+
+
 #### <span id="usage-4.1">3.1 AES</span>
 * 使用示例
 1. [test_aes](https://github.com/chanlly/encryption/blob/master/test/test_aes.php)

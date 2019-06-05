@@ -8,6 +8,7 @@
 
 use Chanlly\Encryption\Constants\Openssl;
 use Chanlly\Encryption\Encryption;
+use Chanlly\Encryption\Factories\AesFactory;
 
 require "../vendor/autoload.php";
 
@@ -15,6 +16,8 @@ $key = 'R09w0jmo';
 $iv = '1234567890123456';
 
 /* ======== coding with Base64 ======== */
+// $aes = AesFactory::createAesCbc128($key, $iv);
+// $aes = Encryption::$aes::createAesCbc128($key, $iv);
 $aes = Encryption::aesFactory()::createAesCbc128($key, $iv);
 $str = 'test aes cbc encryption, coding with base64.';
 $encrypted = $aes->encrypt($str);

@@ -9,6 +9,7 @@
 use Chanlly\Encryption\Encryption;
 use Chanlly\Encryption\Exceptions\IoException;
 use Chanlly\Encryption\Exceptions\RsaException;
+use Chanlly\Encryption\Factories\RsaFactory;
 
 require '../vendor/autoload.php';
 
@@ -16,6 +17,8 @@ $pubFile = __DIR__.'/resources/public.pem';
 $priFile = __DIR__.'/resources/private_p12.pfx';
 $password = '123456';
 
+// $rsa = RsaFactory::createPkcs12($pubFile, $priFile, $password);
+// $rsa = Encryption::$rsa::createPkcs12($pubFile, $priFile, $password);
 $rsa = Encryption::rsaFactory()::createPkcs12($pubFile, $priFile, $password);
 
 // 设置编码格式，默认为 Openssl::CODING_BASE64 base64

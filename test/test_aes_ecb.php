@@ -8,12 +8,15 @@
 
 use Chanlly\Encryption\Constants\Openssl;
 use Chanlly\Encryption\Encryption;
+use Chanlly\Encryption\Factories\AesFactory;
 
 require "../vendor/autoload.php";
 
 $key = 'R09w0jmo';
 
 /* ======== coding with Base64 ======== */
+// $aes = AesFactory::createAesEcb128($key);
+// $aes = Encryption::$aes::createAesEcb128($key);
 $aes = Encryption::aesFactory()::createAesEcb128($key);
 $str = 'test aes ecb encryption, coding with base64.';
 $encrypted = $aes->encrypt($str);
