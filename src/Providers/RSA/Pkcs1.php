@@ -11,6 +11,10 @@ namespace Chanlly\Encryption\Providers\RSA;
 
 use Chanlly\Encryption\Components\Reading\Pkcs1Reading;
 
+/**
+ * Class Pkcs1
+ * @package Chanlly\Encryption\Providers\RSA
+ */
 class Pkcs1 extends PkcsPem
 {
     
@@ -19,9 +23,7 @@ class Pkcs1 extends PkcsPem
      */
     protected function init()
     {
-        // change reading with Pkcs1Reading
         $this->reading = new Pkcs1Reading();
     }
-    
     
 }

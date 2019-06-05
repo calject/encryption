@@ -6,10 +6,9 @@
  * Annotation:
  */
 
-use Chanlly\Encryption\Constants\Openssl;
+use Chanlly\Encryption\Encryption;
 use Chanlly\Encryption\Exceptions\IoException;
 use Chanlly\Encryption\Exceptions\RsaException;
-use Chanlly\Encryption\Providers\RSA\PkcsPfx;
 
 require '../vendor/autoload.php';
 
@@ -17,7 +16,7 @@ $pubFile = __DIR__.'/resources/public.pem';
 $priFile = __DIR__.'/resources/private_p12.pfx';
 $password = '123456';
 
-$rsa = new PkcsPfx($pubFile, $priFile, $password);
+$rsa = Encryption::rsaFactory()::createPkcs12($pubFile, $priFile, $password);
 
 // 设置编码格式，默认为 Openssl::CODING_BASE64 base64
 // $rsa->setCodingMode(Openssl::CODING_HEX_BIN);
@@ -37,11 +36,11 @@ try {
     echo PHP_EOL . '</br>';
     echo PHP_EOL . '</br>';
     
-    $sign = $rsa->sign($str);
+    $sign = $rsa->sign($encrypted);
     printf("签名: " . $sign);
     echo PHP_EOL . '</br>';
     
-    printf("验签: " . ($rsa->verify($str, $sign) ? '通过' : '未通过'));
+    printf("验签: " . ($rsa->verify($encrypted, $sign) ? '通过' : '未通过'));
     echo PHP_EOL . '</br>';
     echo PHP_EOL . '</br>';
     

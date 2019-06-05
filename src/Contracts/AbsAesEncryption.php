@@ -8,10 +8,7 @@
 
 namespace Chanlly\Encryption\Contracts;
 
-use Chanlly\Encryption\Components\OptMatch;
-use Chanlly\Encryption\Config\OpensslMap;
 use Chanlly\Encryption\Constants\Openssl;
-use Closure;
 
 abstract class AbsAesEncryption extends AbsEncryption implements IAesEncryption
 {
@@ -30,11 +27,6 @@ abstract class AbsAesEncryption extends AbsEncryption implements IAesEncryption
      * @var string
      */
     protected $iv;
-    
-    /**
-     * @var OptMatch
-     */
-    protected $optMatch;
     
     /**
      * @var string
@@ -61,7 +53,7 @@ abstract class AbsAesEncryption extends AbsEncryption implements IAesEncryption
         $this->iv = $iv;
         $this->cipherMode = $cipherMode;
         $this->expand = $expand;
-        $this->bind($opts);
+        $this->setOpts($opts);
         $this->init();
     }
     
@@ -69,33 +61,6 @@ abstract class AbsAesEncryption extends AbsEncryption implements IAesEncryption
      * init
      */
     protected function init() {}
-    
-    /**
-     * @param Closure $handle
-     * @return mixed
-     */
-    protected function match(Closure $handle)
-    {
-        if (!$this->optMatch->isMatch()) {
-            $this->optMatch->match();
-        }
-        return call_user_func($handle);
-    }
-    
-    /**
-     * bind opt handle
-     * @param int $opts
-     */
-    private function bind(int $opts)
-    {
-        $this->optMatch = new OptMatch($opts);
-        $this->optMatch->bindClosure($this);
-        $this->optMatch->binds(OpensslMap::CODING_LIST, function (int $mode) {
-            $this->codingMode = $mode;
-        })->binds(OpensslMap::PKCS_LIST, function (int $mode) {
-            $this->paddingMode = $mode;
-        })->match();
-    }
     
     /*---------------------------------------------- set ----------------------------------------------*/
     

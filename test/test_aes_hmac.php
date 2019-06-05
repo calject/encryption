@@ -6,9 +6,8 @@
  * Annotation:
  */
 
-use Chanlly\Encryption\Constants\Openssl;
+use Chanlly\Encryption\Encryption;
 use Chanlly\Encryption\Exceptions\AesException;
-use Chanlly\Encryption\Providers\AES\AES_HMAC;
 
 require "../vendor/autoload.php";
 
@@ -16,20 +15,23 @@ require "../vendor/autoload.php";
 $key = 'as9d8ajsd9asjdas';
 $iv = '1234567890123456';
 
-$aes = new AES_HMAC($key, Openssl::CODING_BASE64, Openssl::AES_MODE_CBC_128, $iv);
+$aes = Encryption::aesHmacFactory()::createAesCbc128($key, $iv);
 
 $data = 'test aes cbc 128 hmac .';
 
 try {
     $encrypt = $aes->encrypt($data);
-    dump($encrypt);
+    printf('encrypt: '.$encrypt);
+    echo PHP_EOL . '</br>';
     $decrypt = $aes->decrypt($encrypt);
-    dump($decrypt);
+    printf('decrypt: '.$decrypt);
+    echo PHP_EOL . '</br>';
     
 } catch (AesException $e) {
-    dump('AesException:', $e);
+    printf('AesException:');
+    var_dump($e);
 } catch (Exception $e) {
-    dump($e);
+    var_dump($e);
 }
 
 

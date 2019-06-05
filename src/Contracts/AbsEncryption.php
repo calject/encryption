@@ -10,6 +10,7 @@ namespace Chanlly\Encryption\Contracts;
 
 
 use Chanlly\Encryption\Components\Coding\Base64Coding;
+use Chanlly\Encryption\Components\OptMatch;
 use Chanlly\Encryption\Components\Padding\NoPadding;
 use Chanlly\Encryption\Config\OpensslMap;
 use Chanlly\Encryption\Constants\Openssl;
@@ -59,6 +60,23 @@ abstract class AbsEncryption
             $padding = new $class;
         }
         return $padding;
+    }
+    
+    /**
+     * bind opt handle
+     * @param int $opts
+     * @return $this
+     */
+    public function setOpts(int $opts)
+    {
+        $optMatch = new OptMatch($opts);
+        $optMatch->bindClosure($this);
+        $optMatch->binds(OpensslMap::CODING_LIST, function (int $mode) {
+            $this->codingMode = $mode;
+        })->binds(OpensslMap::PKCS_LIST, function (int $mode) {
+            $this->paddingMode = $mode;
+        })->match();
+        return $this;
     }
     
     /**
