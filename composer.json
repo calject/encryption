@@ -1,6 +1,7 @@
 {
     "name": "chanlly/encryption",
     "description":"encryption",
+    "license": "MIT",
     "authors": [
         {
             "name": "沧澜",
