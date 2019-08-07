@@ -11,11 +11,10 @@ namespace CalJect\Encryption\Contracts;
 
 use CalJect\Encryption\Components\Coding\Base64Coding;
 use CalJect\Encryption\Components\Coding\HexBinCoding;
-use CalJect\Encryption\Components\Coding\NoCoding;
 use CalJect\Encryption\Components\OptMatch;
-use CalJect\Encryption\Components\Padding\NoPadding;
 use CalJect\Encryption\Config\OpensslMap;
 use CalJect\Encryption\Constants\Openssl;
+use Closure;
 
 abstract class AbsEncryption
 {
@@ -26,24 +25,19 @@ abstract class AbsEncryption
     protected $coding;
     
     /**
+     * @var ICoding
+     */
+    protected $encryptCoding;
+    
+    /**
      * @var int
      */
     protected $codingMode = Openssl::CODING_BASE64;
     
     /**
-     * @var IPadding
-     */
-    protected $padding;
-    
-    /**
      * @var int
      */
     protected $paddingMode = Openssl::NO_PADDING;
-    
-    /**
-     * @var ICoding
-     */
-    protected $encryptCoding;
     
     /**
      * @var int
@@ -56,23 +50,12 @@ abstract class AbsEncryption
     final protected function coding(): ICoding
     {
         if (!$coding = &$this->coding) {
-            $class = OpensslMap::CODING_MAP[$this->codingMode] ?? Base64Coding::class;
+            $class = OpensslMap::CONTACTS[$this->codingMode] ?? Base64Coding::class;
             $coding = new $class;
         }
         return $coding;
     }
     
-    /**
-     * @return IPadding
-     */
-    final protected function padding(): IPadding
-    {
-        if (!$padding = &$this->padding) {
-            $class = OpensslMap::PADDING_MAP[$this->paddingMode] ?? NoPadding::class;
-            $padding = new $class;
-        }
-        return $padding;
-    }
     
     /**
      * @return ICoding
@@ -80,7 +63,7 @@ abstract class AbsEncryption
     final protected function encryptCoding(): ICoding
     {
         if (!$encryptCoding = &$this->encryptCoding) {
-            $class = OpensslMap::ENCRYPT_CODING_MAP[$this->encryptMode] ?? HexBinCoding::class;
+            $class = OpensslMap::CONTACTS[$this->encryptMode] ?? HexBinCoding::class;
             $encryptCoding = new $class;
         }
         return $encryptCoding;
@@ -93,16 +76,7 @@ abstract class AbsEncryption
      */
     public function setOpts(int $opts)
     {
-        $optMatch = new OptMatch($opts);
-        $optMatch->bindClosure($this);
-        $optMatch->binds(OpensslMap::CODING_LIST, function (int $mode) {
-            $this->codingMode = $mode;
-        })->binds(OpensslMap::PKCS_LIST, function (int $mode) {
-            $this->paddingMode = $mode;
-        })->binds(OpensslMap::ENCRYPT_LIST, function (int $mode) {
-            $this->encryptMode = $mode;
-        })->match();
-        return $this;
+        return $this->optsHandle($opts);
     }
     
     /**
@@ -125,24 +99,26 @@ abstract class AbsEncryption
         return $this;
     }
     
+    /*---------------------------------------------- protected ----------------------------------------------*/
+    
     /**
-     * @param IPadding $padding
-     * @return $this
+     * @param int $opts
+     * @param Closure $binds function(OptMatch $optMatch) {}
+     * @return static
      */
-    public function setPadding(IPadding $padding)
+    protected function optsHandle(int $opts, Closure $binds = null)
     {
-        $this->padding = $padding;
+        $optMatch = new OptMatch($opts);
+        $optMatch->bindClosure($this);
+        $optMatch->binds(OpensslMap::LISTS[OpensslMap::OPT_CODING], function (int $mode) {
+            $this->codingMode = $mode;
+        })->binds(OpensslMap::LISTS[OpensslMap::OPT_ENCRYPT_CODING], function (int $mode) {
+            $this->encryptMode = $mode;
+        });
+        $binds && call_user_func($binds, $optMatch);
+        $optMatch->match();
         return $this;
     }
     
-    /**
-     * @param int $paddingMode
-     * @return $this
-     */
-    public function setPaddingMode(int $paddingMode)
-    {
-        $this->paddingMode = $paddingMode;
-        return $this;
-    }
     
 }

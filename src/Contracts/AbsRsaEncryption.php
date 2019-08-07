@@ -9,7 +9,9 @@
 namespace CalJect\Encryption\Contracts;
 
 
+use CalJect\Encryption\Components\OptMatch;
 use CalJect\Encryption\Components\Reading\FileReading;
+use CalJect\Encryption\Config\OpensslMap;
 use CalJect\Encryption\Constants\Openssl;
 use CalJect\Encryption\Exceptions\IoException;
 use CalJect\Encryption\Exceptions\RsaException;
@@ -37,6 +39,16 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
     const KEY_DECRYPT = 'decrypt';
     
     /**
+     * @var IPubFileRead
+     */
+    protected $pubFileRead;
+    
+    /**
+     * @var IPriFileRead
+     */
+    protected $priFileRead;
+    
+    /**
      * pub/pri key file path
      * @var string
      */
@@ -55,7 +67,7 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
     protected $priPassword;
     
     /**
-     * @var IReading
+     * @var IReadRead
      */
     protected $reading;
     
@@ -117,6 +129,22 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
         return (bool)openssl_verify($data, $this->signCoding()->decode($sign), $this->getPubKey(), $opts ?? OPENSSL_ALGO_SHA1);
     }
     
+    /**
+     * bind opt handle
+     * @param int $opts
+     * @return $this
+     */
+    public function setOpts(int $opts)
+    {
+        return $this->optsHandle($opts, function(OptMatch $optMatch) {
+            $optMatch->binds(OpensslMap::LISTS[OpensslMap::OPT_PUB_FILE_READ], function (int $mode) {
+                $this->pubFileRead = OpensslMap::FILE_READ_CONTACTS[$mode] ?? FileReading::class;
+            })->binds(OpensslMap::LISTS[OpensslMap::OPT_PRI_FILE_READ], function (int $mode) {
+                $this->priFileRead = OpensslMap::FILE_READ_CONTACTS[$mode] ?? FileReading::class;
+            });
+        });
+    }
+    
     /*---------------------------------------------- protected handle ----------------------------------------------*/
     
     /**
@@ -157,19 +185,45 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
         }
     }
     
-    
-    
     /*---------------------------------------------- protected get ----------------------------------------------*/
     
     /**
-     * @return IReading
+     * @return IReadRead
      */
-    final protected function reading(): IReading
+    final protected function reading(): IReadRead
     {
         if (!$this->reading) {
             $this->reading = new FileReading();
         }
         return $this->reading;
+    }
+    
+    /**
+     * @return IPubFileRead
+     */
+    protected function pubFileRead(): IPubFileRead
+    {
+        if (is_object($this->pubFileRead)) {
+            return $this->pubFileRead;
+        } else if (isset($this->pubFileRead) && class_exists($this->pubFileRead)) {
+            return $this->pubFileRead = new $this->pubFileRead;
+        } else {
+            return $this->reading();
+        }
+    }
+    
+    /**
+     * @return IPriFileRead
+     */
+    protected function priFileRead(): IPriFileRead
+    {
+        if (is_object($this->priFileRead)) {
+            return $this->priFileRead;
+        } else if (isset($this->priFileRead) && class_exists($this->priFileRead)) {
+            return $this->priFileRead = new $this->priFileRead;
+        } else {
+            return $this->reading();
+        }
     }
     
     /**
@@ -194,7 +248,7 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
     final protected function getPubKey($type = Openssl::FILE_KEY, Closure $getKey = null)
     {
         if (!$pubKey = &$this->pubKey) {
-            $pubContent = $this->reading()->readPubFile($this->pubFilePath);
+            $pubContent = $this->pubFileRead()->readPubFile($this->pubFilePath);
             if ($type == Openssl::FILE_PKEY) {
                 $pubKey = openssl_pkey_get_public($pubContent);
             } else {
@@ -217,7 +271,7 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
     final protected function getPriKey($type = Openssl::FILE_KEY, Closure $getKey = null)
     {
         if (!$priKey = &$this->priKey) {
-            $priContent = $this->reading()->readPriFile($this->priFilePath);
+            $priContent = $this->priFileRead()->readPriFile($this->priFilePath);
             if ($type == Openssl::FILE_PKEY) {
                 $priKey = openssl_pkey_get_private($priContent);
             } else if ($type == Openssl::FILE_PKCS12) {

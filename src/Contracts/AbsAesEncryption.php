@@ -8,6 +8,9 @@
 
 namespace CalJect\Encryption\Contracts;
 
+use CalJect\Encryption\Components\OptMatch;
+use CalJect\Encryption\Components\Padding\NoPadding;
+use CalJect\Encryption\Config\OpensslMap;
 use CalJect\Encryption\Constants\Openssl;
 
 abstract class AbsAesEncryption extends AbsEncryption implements IAesEncryption
@@ -32,6 +35,11 @@ abstract class AbsAesEncryption extends AbsEncryption implements IAesEncryption
      * @var string
      */
     protected $cipherMode;
+    
+    /**
+     * @var IPadding
+     */
+    protected $padding;
     
     /**
      * @var array
@@ -61,6 +69,52 @@ abstract class AbsAesEncryption extends AbsEncryption implements IAesEncryption
      * init
      */
     protected function init() {}
+    
+    /**
+     * @param int $opts
+     * @return $this
+     */
+    public function setOpts(int $opts)
+    {
+        return $this->optsHandle($opts, function (OptMatch $optMatch) {
+            $optMatch->binds(OpensslMap::LISTS[OpensslMap::OPT_PADDING], function (int $mode) {
+                $this->paddingMode = $mode;
+            });
+        });
+    }
+    
+    /**
+     * @return IPadding
+     */
+    final protected function padding(): IPadding
+    {
+        if (!$padding = &$this->padding) {
+            $class = OpensslMap::CONTACTS[$this->paddingMode] ?? NoPadding::class;
+            $padding = new $class;
+        }
+        return $padding;
+    }
+    
+    /**
+     * @param int $paddingMode
+     * @return $this
+     */
+    public function setPaddingMode(int $paddingMode)
+    {
+        $this->paddingMode = $paddingMode;
+        return $this;
+    }
+    
+    
+    /**
+     * @param IPadding $padding
+     * @return $this
+     */
+    public function setPadding(IPadding $padding)
+    {
+        $this->padding = $padding;
+        return $this;
+    }
     
     /*---------------------------------------------- set ----------------------------------------------*/
     

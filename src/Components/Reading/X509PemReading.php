@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: 沧澜
- * Date: 2019-05-22
- * Annotation:
+ * Author: 沧澜
+ * Date: 2019-08-07
  */
 
 namespace CalJect\Encryption\Components\Reading;
@@ -14,7 +12,7 @@ use CalJect\Encryption\Contracts\IReadRead;
 use CalJect\Encryption\Exceptions\IoException;
 use CalJect\Encryption\Helpers\FileGetContentHelper;
 
-class Pkcs1Reading implements IReadRead
+class X509PemReading implements IReadRead
 {
     
     /**
@@ -24,7 +22,10 @@ class Pkcs1Reading implements IReadRead
      */
     public function readPubFile(string $pubFilePath): string
     {
-        return RSADeclare::declarePubKeyPkcs1(FileGetContentHelper::fileFetContent($pubFilePath));
+        $pubKey = FileGetContentHelper::fileFetContent($pubFilePath);
+        $pubKey = chunk_split(base64_encode($pubKey), 64, "\n");
+        $pubKey = rtrim($pubKey, "\n");
+        return RSADeclare::declarePubKeyPkcs8($pubKey);
     }
     
     /**
@@ -34,6 +35,6 @@ class Pkcs1Reading implements IReadRead
      */
     public function readPriFile(string $priFilePath): string
     {
-        return RSADeclare::declarePriKeyPkcs1(FileGetContentHelper::fileFetContent($priFilePath));
+        return FileGetContentHelper::fileFetContent($priFilePath);
     }
 }

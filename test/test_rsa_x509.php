@@ -8,5 +8,48 @@
 
 require "../vendor/autoload.php";
 
+use CalJect\Encryption\Constants\Openssl;
+use CalJect\Encryption\Encryption;
+use CalJect\Encryption\Exceptions\IoException;
+use CalJect\Encryption\Exceptions\RsaException;
+
+require '../vendor/autoload.php';
+
+$pubFile = __DIR__.'/resources/public.x509';
+$priFile = __DIR__.'/resources/private_p8.pem';
+$password = '123456';
+
+// $rsa = RsaFactory::createPkcs12($pubFile, $priFile, $password);
+// $rsa = Encryption::$rsa::createPkcs12($pubFile, $priFile, $password);
+$rsa = Encryption::rsaFactory()::createX509($pubFile, $priFile, Openssl::ENCRYPT_CODING_NO | Openssl::FILE_READ_PUB_X509_PEM);
+// 设置编码格式，默认为 Openssl::CODING_BASE64 base64
+// Openssl::FILE_READ_PUB_X509_PEM: 设置x509转换格式为pkcs8密钥格式(该文件由pkcs8格式生成) - 可选参数 Openssl::FILE_READ_PUB_X509_CER(默认) 转换为 CERTIFICATE X509格式可读证书
+// $rsa->setCodingMode(Openssl::CODING_HEX_BIN);
+
+$str = "test rsa encryption with x509.";
 
 
+try {
+    printf("原文: ".$str);
+    echo PHP_EOL . '</br>';
+    
+    $encrypted = $rsa->encrypt($str);
+    printf("密文: " . $encrypted);
+    echo PHP_EOL . '</br>';
+    
+    printf("解密: " . $rsa->decrypt($encrypted));
+    echo PHP_EOL . '</br>';
+    echo PHP_EOL . '</br>';
+    
+    $sign = $rsa->sign($encrypted);
+    printf("签名: " . $sign);
+    echo PHP_EOL . '</br>';
+    
+    printf("验签: " . ($rsa->verify($encrypted, $sign) ? '通过' : '未通过'));
+    echo PHP_EOL . '</br>';
+    echo PHP_EOL . '</br>';
+    
+} catch (IoException | RsaException $e) {
+    echo "<pre>";
+    printf($e);
+}

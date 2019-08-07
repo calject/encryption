@@ -8,7 +8,7 @@
 
 namespace CalJect\Encryption\Providers\RSA;
 
-use CalJect\Encryption\Components\Reading\X509Reading;
+use CalJect\Encryption\Components\Reading\X509CerReading;
 use CalJect\Encryption\Constants\Openssl;
 use CalJect\Encryption\Exceptions\IoException;
 use CalJect\Encryption\Exceptions\RsaException;
@@ -26,7 +26,7 @@ class X509 extends PkcsPem
      */
     protected function init()
     {
-        $this->reading = new X509Reading();
+        $this->reading = new X509CerReading();
     }
     
     /**
@@ -40,9 +40,9 @@ class X509 extends PkcsPem
     protected function getRsaCryptKey(string $key, $opt = Openssl::FILE_KEY)
     {
         if ($key === self::KEY_ENCRYPT) {
-            return $this->isModelOpposite() ? $this->getPriKey($opt) : $this->getPubKey(Openssl::FILE_PKEY);
+            return $this->isModelOpposite() ? $this->getPriKey($opt) : $this->getPubKey(Openssl::FILE_KEY);
         } else {
-            return $this->isModelOpposite() ? $this->getPubKey(Openssl::FILE_PKEY) : $this->getPriKey($opt);
+            return $this->isModelOpposite() ? $this->getPubKey(Openssl::FILE_KEY) : $this->getPriKey($opt);
         }
     }
     

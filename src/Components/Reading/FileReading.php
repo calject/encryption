@@ -8,11 +8,11 @@
 
 namespace CalJect\Encryption\Components\Reading;
 
-use CalJect\Encryption\Contracts\IReading;
+use CalJect\Encryption\Contracts\IReadRead;
 use CalJect\Encryption\Exceptions\IoException;
 use CalJect\Encryption\Helpers\FileGetContentHelper;
 
-class FileReading implements IReading
+class FileReading implements IReadRead
 {
     
     /**

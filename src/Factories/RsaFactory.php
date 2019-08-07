@@ -9,6 +9,7 @@
 namespace CalJect\Encryption\Factories;
 
 use CalJect\Encryption\Constants\Openssl;
+use CalJect\Encryption\Contracts\AbsEncryption;
 use CalJect\Encryption\Providers\RSA\Pkcs1;
 use CalJect\Encryption\Providers\RSA\PkcsPem;
 use CalJect\Encryption\Providers\RSA\PkcsPfx;

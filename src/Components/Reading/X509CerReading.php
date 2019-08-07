@@ -9,11 +9,11 @@
 namespace CalJect\Encryption\Components\Reading;
 
 use CalJect\Encryption\Components\RSADeclare;
-use CalJect\Encryption\Contracts\IReading;
+use CalJect\Encryption\Contracts\IReadRead;
 use CalJect\Encryption\Exceptions\IoException;
 use CalJect\Encryption\Helpers\FileGetContentHelper;
 
-class X509Reading implements IReading
+class X509CerReading implements IReadRead
 {
     
     /**

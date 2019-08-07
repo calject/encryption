@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: 沧澜
- * Date: 2019-05-22
- * Annotation:
+ * Author: 沧澜
+ * Date: 2019-08-07
  */
 
 namespace CalJect\Encryption\Contracts;
@@ -11,7 +9,7 @@ namespace CalJect\Encryption\Contracts;
 
 use CalJect\Encryption\Exceptions\IoException;
 
-interface IReading
+interface IPubFileRead
 {
     /**
      * @param string $pubFilePath
@@ -19,12 +17,4 @@ interface IReading
      * @throws IoException
      */
     public function readPubFile(string $pubFilePath): string;
-    
-    /**
-     * @param string $priFilePath
-     * @return string
-     * @throws IoException
-     */
-    public function readPriFile(string $priFilePath): string;
-    
 }
