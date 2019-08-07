@@ -8,6 +8,18 @@
             "email": "lryhuimeng@163.cn"
         }
     ],
+    "keywords": [
+        "calject",
+        "chanlly",
+        "php",
+        "encryption",
+        "encrypt",
+        "decrypt",
+        "加密",
+        "加解密",
+        "RSA",
+        "AES"
+    ],
     "require": {
         "php": "^7.0",
         "ext-openssl": "*",
