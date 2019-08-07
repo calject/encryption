@@ -22,27 +22,7 @@ easy php encryption with RSA and AES in openssl
 
 ### <span id="install">二、安装教程</span> [top](#encryption)
 
-1. 在`composer.json`文件中`repositories`部分加入以下配置
-
-* `gitHub`
-
-```json
-{
-    "type": "git",
-    "url": "https://github.com/chanlly/encryption.git"
-}
-```
-
-* `gitee`
-
-```json
-{
-    "type": "git",
-    "url": "https://gitee.com/chanlly/encryption.git"
-}
-```
-
-2. 执行`composer require "chanlly/encryption"`
+执行`composer require "calject/encryption"`
 
 
 ### <span id="usage">三、使用</span> [top](#encryption)
