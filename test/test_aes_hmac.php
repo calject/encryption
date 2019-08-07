@@ -6,9 +6,9 @@
  * Annotation:
  */
 
-use Chanlly\Encryption\Encryption;
-use Chanlly\Encryption\Exceptions\AesException;
-use Chanlly\Encryption\Factories\AesHmacFactory;
+use CalJect\Encryption\Encryption;
+use CalJect\Encryption\Exceptions\AesException;
+use CalJect\Encryption\Factories\AesHmacFactory;
 
 require "../vendor/autoload.php";
 

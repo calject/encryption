@@ -6,14 +6,14 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Providers\RSA;
+namespace CalJect\Encryption\Providers\RSA;
 
 
-use Chanlly\Encryption\Components\Reading\Pkcs1Reading;
+use CalJect\Encryption\Components\Reading\Pkcs1Reading;
 
 /**
  * Class Pkcs1
- * @package Chanlly\Encryption\Providers\RSA
+ * @package CalJect\Encryption\Providers\RSA
  */
 class Pkcs1 extends PkcsPem
 {

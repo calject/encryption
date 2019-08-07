@@ -6,12 +6,12 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Providers\AES;
+namespace CalJect\Encryption\Providers\AES;
 
-use Chanlly\Encryption\Constants\Openssl;
-use Chanlly\Encryption\Contracts\AbsAesEncryption;
-use Chanlly\Encryption\Exceptions\AesException;
-use Chanlly\Encryption\Helpers\AESEncryptHelper;
+use CalJect\Encryption\Constants\Openssl;
+use CalJect\Encryption\Contracts\AbsAesEncryption;
+use CalJect\Encryption\Exceptions\AesException;
+use CalJect\Encryption\Helpers\AESEncryptHelper;
 use Exception;
 use RuntimeException;
 

@@ -6,13 +6,13 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Contracts;
+namespace CalJect\Encryption\Contracts;
 
 
-use Chanlly\Encryption\Components\Reading\FileReading;
-use Chanlly\Encryption\Constants\Openssl;
-use Chanlly\Encryption\Exceptions\IoException;
-use Chanlly\Encryption\Exceptions\RsaException;
+use CalJect\Encryption\Components\Reading\FileReading;
+use CalJect\Encryption\Constants\Openssl;
+use CalJect\Encryption\Exceptions\IoException;
+use CalJect\Encryption\Exceptions\RsaException;
 use Closure;
 
 abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption

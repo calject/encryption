@@ -6,7 +6,7 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Components;
+namespace CalJect\Encryption\Components;
 
 
 use Closure;

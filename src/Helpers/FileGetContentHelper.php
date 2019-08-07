@@ -6,9 +6,9 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Helpers;
+namespace CalJect\Encryption\Helpers;
 
-use Chanlly\Encryption\Exceptions\IoException;
+use CalJect\Encryption\Exceptions\IoException;
 use Closure;
 
 class FileGetContentHelper

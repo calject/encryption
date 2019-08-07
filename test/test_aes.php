@@ -6,9 +6,9 @@
  * Annotation:
  */
 
-use Chanlly\Encryption\Constants\Openssl;
-use Chanlly\Encryption\Encryption;
-use Chanlly\Encryption\Factories\AesFactory;
+use CalJect\Encryption\Constants\Openssl;
+use CalJect\Encryption\Encryption;
+use CalJect\Encryption\Factories\AesFactory;
 
 require "../vendor/autoload.php";
 

@@ -6,9 +6,9 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Components\Coding;
+namespace CalJect\Encryption\Components\Coding;
 
-use Chanlly\Encryption\Contracts\ICoding;
+use CalJect\Encryption\Contracts\ICoding;
 
 class HexBinCoding implements ICoding
 {

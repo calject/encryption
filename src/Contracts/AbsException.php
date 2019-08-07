@@ -6,7 +6,7 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Contracts;
+namespace CalJect\Encryption\Contracts;
 
 use Exception;
 use Throwable;

@@ -6,12 +6,12 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Factories;
+namespace CalJect\Encryption\Factories;
 
 
-use Chanlly\Encryption\Constants\Openssl;
-use Chanlly\Encryption\Contracts\AbsAesFactory;
-use Chanlly\Encryption\Providers\AES\AES;
+use CalJect\Encryption\Constants\Openssl;
+use CalJect\Encryption\Contracts\AbsAesFactory;
+use CalJect\Encryption\Providers\AES\AES;
 
 class AesFactory extends AbsAesFactory
 {

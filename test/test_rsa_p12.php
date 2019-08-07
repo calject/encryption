@@ -6,10 +6,10 @@
  * Annotation:
  */
 
-use Chanlly\Encryption\Encryption;
-use Chanlly\Encryption\Exceptions\IoException;
-use Chanlly\Encryption\Exceptions\RsaException;
-use Chanlly\Encryption\Factories\RsaFactory;
+use CalJect\Encryption\Encryption;
+use CalJect\Encryption\Exceptions\IoException;
+use CalJect\Encryption\Exceptions\RsaException;
+use CalJect\Encryption\Factories\RsaFactory;
 
 require '../vendor/autoload.php';
 

@@ -6,16 +6,16 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Config;
+namespace CalJect\Encryption\Config;
 
 
-use Chanlly\Encryption\Components\Coding\Base64Coding;
-use Chanlly\Encryption\Components\Coding\HexBinCoding;
-use Chanlly\Encryption\Components\Coding\NoCoding;
-use Chanlly\Encryption\Components\Padding\NoPadding;
-use Chanlly\Encryption\Components\Padding\Pkcs5Padding;
-use Chanlly\Encryption\Components\Padding\Pkcs7Padding;
-use Chanlly\Encryption\Constants\Openssl;
+use CalJect\Encryption\Components\Coding\Base64Coding;
+use CalJect\Encryption\Components\Coding\HexBinCoding;
+use CalJect\Encryption\Components\Coding\NoCoding;
+use CalJect\Encryption\Components\Padding\NoPadding;
+use CalJect\Encryption\Components\Padding\Pkcs5Padding;
+use CalJect\Encryption\Components\Padding\Pkcs7Padding;
+use CalJect\Encryption\Constants\Openssl;
 
 interface OpensslMap
 {

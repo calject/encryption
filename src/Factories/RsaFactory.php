@@ -6,13 +6,13 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Factories;
+namespace CalJect\Encryption\Factories;
 
-use Chanlly\Encryption\Constants\Openssl;
-use Chanlly\Encryption\Providers\RSA\Pkcs1;
-use Chanlly\Encryption\Providers\RSA\PkcsPem;
-use Chanlly\Encryption\Providers\RSA\PkcsPfx;
-use Chanlly\Encryption\Providers\RSA\X509;
+use CalJect\Encryption\Constants\Openssl;
+use CalJect\Encryption\Providers\RSA\Pkcs1;
+use CalJect\Encryption\Providers\RSA\PkcsPem;
+use CalJect\Encryption\Providers\RSA\PkcsPfx;
+use CalJect\Encryption\Providers\RSA\X509;
 
 class RsaFactory
 {

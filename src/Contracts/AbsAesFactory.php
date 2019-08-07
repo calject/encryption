@@ -6,9 +6,9 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Contracts;
+namespace CalJect\Encryption\Contracts;
 
-use Chanlly\Encryption\Constants\Openssl;
+use CalJect\Encryption\Constants\Openssl;
 
 abstract class AbsAesFactory
 {

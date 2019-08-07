@@ -6,7 +6,7 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Helpers;
+namespace CalJect\Encryption\Helpers;
 
 
 use Exception;

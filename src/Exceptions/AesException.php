@@ -6,15 +6,15 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Exceptions;
+namespace CalJect\Encryption\Exceptions;
 
 
-use Chanlly\Encryption\Contracts\AbsException;
+use CalJect\Encryption\Contracts\AbsException;
 use Throwable;
 
 /**
  * Class AesException
- * @package Chanlly\Encryption\Exceptions
+ * @package CalJect\Encryption\Exceptions
  * @method static void throw($message = "", $code = 0, Throwable $previous = null)
  */
 class AesException extends AbsException

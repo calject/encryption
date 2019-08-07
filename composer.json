@@ -1,5 +1,5 @@
 {
-    "name": "chanlly/encryption",
+    "name": "calject/encryption",
     "description":"encryption",
     "license": "MIT",
     "authors": [
@@ -15,12 +15,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Chanlly\\Encryption\\": "src"
+            "CalJect\\Encryption\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Chanlly\\Encryption\\Test\\": "test"
+            "CalJect\\Encryption\\Test\\": "test"
         }
     }
 }

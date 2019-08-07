@@ -6,14 +6,14 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Contracts;
+namespace CalJect\Encryption\Contracts;
 
 
-use Chanlly\Encryption\Components\Coding\Base64Coding;
-use Chanlly\Encryption\Components\OptMatch;
-use Chanlly\Encryption\Components\Padding\NoPadding;
-use Chanlly\Encryption\Config\OpensslMap;
-use Chanlly\Encryption\Constants\Openssl;
+use CalJect\Encryption\Components\Coding\Base64Coding;
+use CalJect\Encryption\Components\OptMatch;
+use CalJect\Encryption\Components\Padding\NoPadding;
+use CalJect\Encryption\Config\OpensslMap;
+use CalJect\Encryption\Constants\Openssl;
 
 abstract class AbsEncryption
 {

@@ -6,10 +6,10 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Contracts;
+namespace CalJect\Encryption\Contracts;
 
 
-use Chanlly\Encryption\Exceptions\IoException;
+use CalJect\Encryption\Exceptions\IoException;
 
 interface IReading
 {

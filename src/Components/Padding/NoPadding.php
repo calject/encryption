@@ -6,10 +6,10 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Components\Padding;
+namespace CalJect\Encryption\Components\Padding;
 
 
-use Chanlly\Encryption\Contracts\IPadding;
+use CalJect\Encryption\Contracts\IPadding;
 
 class NoPadding implements IPadding
 {

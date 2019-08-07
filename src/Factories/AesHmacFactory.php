@@ -6,10 +6,10 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Factories;
+namespace CalJect\Encryption\Factories;
 
-use Chanlly\Encryption\Contracts\AbsAesFactory;
-use Chanlly\Encryption\Providers\AES\AES_HMAC;
+use CalJect\Encryption\Contracts\AbsAesFactory;
+use CalJect\Encryption\Providers\AES\AES_HMAC;
 
 class AesHmacFactory extends AbsAesFactory
 {

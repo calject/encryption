@@ -6,9 +6,9 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Providers\AES;
+namespace CalJect\Encryption\Providers\AES;
 
-use Chanlly\Encryption\Contracts\AbsAesEncryption;
+use CalJect\Encryption\Contracts\AbsAesEncryption;
 
 class AES extends AbsAesEncryption
 {

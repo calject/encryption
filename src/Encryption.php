@@ -6,11 +6,11 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption;
+namespace CalJect\Encryption;
 
-use Chanlly\Encryption\Factories\AesFactory;
-use Chanlly\Encryption\Factories\AesHmacFactory;
-use Chanlly\Encryption\Factories\RsaFactory;
+use CalJect\Encryption\Factories\AesFactory;
+use CalJect\Encryption\Factories\AesHmacFactory;
+use CalJect\Encryption\Factories\RsaFactory;
 
 class Encryption
 {

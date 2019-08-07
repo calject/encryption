@@ -6,16 +6,16 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Providers\RSA;
+namespace CalJect\Encryption\Providers\RSA;
 
-use Chanlly\Encryption\Contracts\AbsRsaEncryption;
-use Chanlly\Encryption\Exceptions\IoException;
-use Chanlly\Encryption\Exceptions\RsaException;
+use CalJect\Encryption\Contracts\AbsRsaEncryption;
+use CalJect\Encryption\Exceptions\IoException;
+use CalJect\Encryption\Exceptions\RsaException;
 
 /**
  * Class PkcsPem
  * 基于pkcs1/8标准的加解密 密钥文件一般为pem、cer等为后缀
- * @package Chanlly\Encryption\Providers\RSA
+ * @package CalJect\Encryption\Providers\RSA
  */
 class PkcsPem extends AbsRsaEncryption
 {

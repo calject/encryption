@@ -6,14 +6,14 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Exceptions;
+namespace CalJect\Encryption\Exceptions;
 
-use Chanlly\Encryption\Contracts\AbsException;
+use CalJect\Encryption\Contracts\AbsException;
 use Throwable;
 
 /**
  * Class RsaException
- * @package Chanlly\Encryption\Exceptions
+ * @package CalJect\Encryption\Exceptions
  * @method static void throw($message = "", $code = 0, Throwable $previous = null)
  */
 class RsaException extends AbsException

@@ -6,12 +6,12 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Components\Reading;
+namespace CalJect\Encryption\Components\Reading;
 
-use Chanlly\Encryption\Components\RSADeclare;
-use Chanlly\Encryption\Contracts\IReading;
-use Chanlly\Encryption\Exceptions\IoException;
-use Chanlly\Encryption\Helpers\FileGetContentHelper;
+use CalJect\Encryption\Components\RSADeclare;
+use CalJect\Encryption\Contracts\IReading;
+use CalJect\Encryption\Exceptions\IoException;
+use CalJect\Encryption\Helpers\FileGetContentHelper;
 
 class X509Reading implements IReading
 {

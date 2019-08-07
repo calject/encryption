@@ -6,7 +6,7 @@
  * Annotation:
  */
 
-namespace Chanlly\Encryption\Constants;
+namespace CalJect\Encryption\Constants;
 
 
 interface Openssl
