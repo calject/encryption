@@ -6,10 +6,10 @@
  * Annotation:
  */
 
+use CalJect\Encryption\Constants\Openssl;
 use CalJect\Encryption\Encryption;
 use CalJect\Encryption\Exceptions\IoException;
 use CalJect\Encryption\Exceptions\RsaException;
-use CalJect\Encryption\Factories\RsaFactory;
 
 require '../vendor/autoload.php';
 
@@ -19,7 +19,7 @@ $password = '123456';
 
 // $rsa = RsaFactory::createPkcs12($pubFile, $priFile, $password);
 // $rsa = Encryption::$rsa::createPkcs12($pubFile, $priFile, $password);
-$rsa = Encryption::rsaFactory()::createPkcs12($pubFile, $priFile, $password);
+$rsa = Encryption::rsaFactory()::createPkcs12($pubFile, $priFile, $password, Openssl::ENCRYPT_CODING_NO);
 
 // 设置编码格式，默认为 Openssl::CODING_BASE64 base64
 // $rsa->setCodingMode(Openssl::CODING_HEX_BIN);

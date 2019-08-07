@@ -26,13 +26,9 @@ interface Openssl
     const PKCS5_PADDING = 1 << 7;
     const PKCS7_PADDING = 1 << 8;
     
-    
-    /* ======== declare list ======== */
-    const FILE_LIST = [Openssl::FILE_KEY, Openssl::FILE_PKEY, Openssl::FILE_PKCS12];
-    const CODING_LIST = [Openssl::CODING_NO, Openssl::CODING_BASE64, Openssl::CODING_HEX_BIN];
-    const PKCS_LIST = [Openssl::NO_PADDING, Openssl::PKCS5_PADDING, Openssl::PKCS7_PADDING];
-    
-    
+    /* ======== 加解密编码数据解析 ======== */
+    const ENCRYPT_CODING_NO = 1 << 9;
+    const ENCRYPT_CODING_HEX_BIN = 1 << 10;
     
     /**
      * 支持AES模式定义 LIST

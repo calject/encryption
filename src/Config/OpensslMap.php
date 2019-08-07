@@ -23,6 +23,7 @@ interface OpensslMap
     const FILE_LIST = [Openssl::FILE_KEY, Openssl::FILE_PKEY, Openssl::FILE_PKCS12];
     const CODING_LIST= [Openssl::CODING_NO, Openssl::CODING_BASE64, Openssl::CODING_HEX_BIN];
     const PKCS_LIST = [Openssl::NO_PADDING, Openssl::PKCS5_PADDING, Openssl::PKCS7_PADDING];
+    const ENCRYPT_LIST = [Openssl::ENCRYPT_CODING_NO, Openssl::ENCRYPT_CODING_HEX_BIN];
     
     /* ======== map ======== */
     const CODING_MAP = [
@@ -37,7 +38,10 @@ interface OpensslMap
         Openssl::PKCS7_PADDING => Pkcs7Padding::class
     ];
     
-    
+    const ENCRYPT_CODING_MAP = [
+        Openssl::ENCRYPT_CODING_NO => NoCoding::class,
+        Openssl::ENCRYPT_CODING_HEX_BIN => HexBinCoding::class
+    ];
     
     
 }

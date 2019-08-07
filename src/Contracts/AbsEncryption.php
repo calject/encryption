@@ -10,6 +10,8 @@ namespace CalJect\Encryption\Contracts;
 
 
 use CalJect\Encryption\Components\Coding\Base64Coding;
+use CalJect\Encryption\Components\Coding\HexBinCoding;
+use CalJect\Encryption\Components\Coding\NoCoding;
 use CalJect\Encryption\Components\OptMatch;
 use CalJect\Encryption\Components\Padding\NoPadding;
 use CalJect\Encryption\Config\OpensslMap;
@@ -39,6 +41,16 @@ abstract class AbsEncryption
     protected $paddingMode = Openssl::NO_PADDING;
     
     /**
+     * @var ICoding
+     */
+    protected $encryptCoding;
+    
+    /**
+     * @var int
+     */
+    protected $encryptMode = Openssl::NO_PADDING;
+    
+    /**
      * @return ICoding
      */
     final protected function coding(): ICoding
@@ -63,6 +75,18 @@ abstract class AbsEncryption
     }
     
     /**
+     * @return ICoding
+     */
+    final protected function encryptCoding(): ICoding
+    {
+        if (!$encryptCoding = &$this->encryptCoding) {
+            $class = OpensslMap::ENCRYPT_CODING_MAP[$this->encryptMode] ?? HexBinCoding::class;
+            $encryptCoding = new $class;
+        }
+        return $encryptCoding;
+    }
+    
+    /**
      * bind opt handle
      * @param int $opts
      * @return $this
@@ -75,6 +99,8 @@ abstract class AbsEncryption
             $this->codingMode = $mode;
         })->binds(OpensslMap::PKCS_LIST, function (int $mode) {
             $this->paddingMode = $mode;
+        })->binds(OpensslMap::ENCRYPT_LIST, function (int $mode) {
+            $this->encryptMode = $mode;
         })->match();
         return $this;
     }
