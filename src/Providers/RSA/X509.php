@@ -20,6 +20,10 @@ use CalJect\Encryption\Exceptions\RsaException;
  */
 class X509 extends PkcsPem
 {
+    /**
+     * @var string
+     */
+    protected $pubFileReadKey = Openssl::FILE_KEY;
     
     /**
      * init
@@ -27,23 +31,6 @@ class X509 extends PkcsPem
     protected function init()
     {
         $this->reading = new X509CerReading();
-    }
-    
-    /**
-     * rewrite getCryptKey function
-     * @param string $key self::KEY_ENCRYPT or self::KEY_DECRYPT
-     * @param string $opt
-     * @return resource
-     * @throws IoException
-     * @throws RsaException
-     */
-    protected function getRsaCryptKey(string $key, $opt = Openssl::FILE_KEY)
-    {
-        if ($key === self::KEY_ENCRYPT) {
-            return $this->isModelOpposite() ? $this->getPriKey($opt) : $this->getPubKey(Openssl::FILE_KEY);
-        } else {
-            return $this->isModelOpposite() ? $this->getPubKey(Openssl::FILE_KEY) : $this->getPriKey($opt);
-        }
     }
     
 }

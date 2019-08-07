@@ -22,6 +22,11 @@ class PkcsPfx extends AbsRsaEncryption
 {
     
     /**
+     * @var string
+     */
+    protected $priFileReadKey = Openssl::FILE_PKCS12;
+    
+    /**
      * @param string $str
      * @return string
      * @throws IoException
@@ -29,7 +34,7 @@ class PkcsPfx extends AbsRsaEncryption
      */
     public function encrypt(string $str): string
     {
-        $key = $this->getRsaCryptKey(self::KEY_ENCRYPT, Openssl::FILE_PKCS12);
+        $key = $this->getRsaCryptKey(self::KEY_ENCRYPT);
         $encryptFunc = $this->getRsaCryptFunc(self::KEY_ENCRYPT);
         $maxlength = $this->getMaxEncryptBlockSize($key);
         $strLen = strlen($str); $encryptPos = 0; $output = ''; $encrypted = '';
@@ -49,7 +54,7 @@ class PkcsPfx extends AbsRsaEncryption
      */
     public function decrypt(string $str): string
     {
-        $key = $this->getRsaCryptKey(self::KEY_DECRYPT, Openssl::FILE_PKCS12);
+        $key = $this->getRsaCryptKey(self::KEY_DECRYPT);
         $decryptFunc = $this->getRsaCryptFunc(self::KEY_DECRYPT);
         $str = $this->coding()->decode($str);
         $strLen = strlen($str); $decryptPos = 0; $output = ''; $decrypted = '';

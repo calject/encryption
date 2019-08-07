@@ -82,6 +82,16 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
      */
     protected $mode;
     
+    /**
+     * @var string
+     */
+    protected $priFileReadKey = Openssl::FILE_KEY;
+    
+    /**
+     * @var string
+     */
+    protected $pubFileReadKey = Openssl::FILE_KEY;
+    
     /***
      * AbsRsaEncryption constructor.
      * @param string $pubFilePath
@@ -112,7 +122,7 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
      */
     public function sign($data, $opts = null): string
     {
-        openssl_sign($data, $sign, $this->getPriKey(), $opts ?? OPENSSL_ALGO_SHA1);
+        openssl_sign($data, $sign, $this->getPriKey($this->priFileReadKey), $opts ?? OPENSSL_ALGO_SHA1);
         return $this->signCoding()->encode($sign);
     }
     
@@ -126,7 +136,7 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
      */
     public function verify($data, string $sign, $opts = null): bool
     {
-        return (bool)openssl_verify($data, $this->signCoding()->decode($sign), $this->getPubKey(), $opts ?? OPENSSL_ALGO_SHA1);
+        return (bool)openssl_verify($data, $this->signCoding()->decode($sign), $this->getPubKey($this->pubFileReadKey), $opts ?? OPENSSL_ALGO_SHA1);
     }
     
     /**
@@ -158,17 +168,16 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
     
     /**
      * @param string $key self::KEY_ENCRYPT or self::KEY_DECRYPT
-     * @param string $opt
      * @return resource
      * @throws IoException
      * @throws RsaException
      */
-    protected function getRsaCryptKey(string $key, $opt = Openssl::FILE_KEY)
+    protected function getRsaCryptKey(string $key)
     {
         if ($key === self::KEY_ENCRYPT) {
-            return $this->isModelOpposite() ? $this->getPriKey($opt) : $this->getPubKey($opt);
+            return $this->isModelOpposite() ? $this->getPriKey($this->priFileReadKey) : $this->getPubKey($this->pubFileReadKey);
         } else {
-            return $this->isModelOpposite() ? $this->getPubKey($opt) : $this->getPriKey($opt);
+            return $this->isModelOpposite() ? $this->getPubKey($this->pubFileReadKey) : $this->getPriKey($this->priFileReadKey);
         }
     }
     
@@ -364,6 +373,26 @@ abstract class AbsRsaEncryption extends AbsEncryption implements IRsaEncryption
     public function setPriPassword(string $priPassword)
     {
         $this->priPassword = $priPassword;
+        return $this;
+    }
+    
+    /**
+     * @param string $pubFileReadKey
+     * @return $this
+     */
+    public function setPubFileReadKey(string $pubFileReadKey)
+    {
+        $this->pubFileReadKey = $pubFileReadKey;
+        return $this;
+    }
+    
+    /**
+     * @param string $priFileReadKey
+     * @return $this
+     */
+    public function setPriFileReadKey(string $priFileReadKey)
+    {
+        $this->priFileReadKey = $priFileReadKey;
         return $this;
     }
     
