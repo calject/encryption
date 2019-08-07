@@ -1,7 +1,7 @@
 # encryption
 easy php encryption with RSA and AES in openssl
 
-[示例](https://github.com/chanlly/encryption/tree/master/test)
+[示例](https://github.com/calject/encryption/tree/master/test)
 
 **Table of Contents**
 
@@ -27,30 +27,30 @@ easy php encryption with RSA and AES in openssl
 
 ### <span id="usage">三、使用</span> [top](#encryption)
 
-* `Chanlly\Encryption\Encryption`
+* `Calject\Encryption\Encryption`
     * `method`
         * `rsaFactory`
         * `aesFactory`
         * `aesHmacFatory`
     * `get`
-        * `Chanlly\Encryption\Encryption::rsaFactory()`
-        * `Chanlly\Encryption\Encryption::aesFactory()`
-        * `Chanlly\Encryption\Encryption::aesHmacFatory()`
+        * `Calject\Encryption\Encryption::rsaFactory()`
+        * `Calject\Encryption\Encryption::aesFactory()`
+        * `Calject\Encryption\Encryption::aesHmacFatory()`
 
-* `Chanlly\Encryption\Factories\RsaFactory`
+* `Calject\Encryption\Factories\RsaFactory`
     * `method`
         * `createPkcs1`
         * `createPkcs8`
         * `createPkcs12`
         * `createX509`
-* `Chanlly\Encryption\Factories\AesFactory`
+* `Calject\Encryption\Factories\AesFactory`
     * `method`
         * `createAes`
         * `createAesCbc128`
         * `createAesCbc256`
         * `createAesEcb128`
         * `createAesEcb256`
-* `Chanlly\Encryption\Factories\AesHmacFactory`
+* `Calject\Encryption\Factories\AesHmacFactory`
     * `method`
         * `createAes`
         * `createAesCbc128`
@@ -73,33 +73,33 @@ $rsa = Encryption::rsaFactory()::createPkcs8($pubFile, $priFile, Openssl::CODING
 
 #### <span id="usage-4.1">3.1 AES</span>
 * 使用示例
-1. [test_aes](https://github.com/chanlly/encryption/blob/master/test/test_aes.php)
-2. [test_aes_ecb](https://github.com/chanlly/encryption/blob/master/test/test_aes_ecb.php)
-3. [test_aes_cbc](https://github.com/chanlly/encryption/blob/master/test/test_aes_cbc.php)
-4. [test_aes_hmac](https://github.com/chanlly/encryption/blob/master/test/test_aes_hmac.php)
+1. [test_aes](https://github.com/calject/encryption/blob/master/test/test_aes.php)
+2. [test_aes_ecb](https://github.com/calject/encryption/blob/master/test/test_aes_ecb.php)
+3. [test_aes_cbc](https://github.com/calject/encryption/blob/master/test/test_aes_cbc.php)
+4. [test_aes_hmac](https://github.com/calject/encryption/blob/master/test/test_aes_hmac.php)
 
 #### <span id="usage-4.1">3.2 RSA</span>
 
 * 使用示例
-1. [test_rsa_pkcs8](https://github.com/chanlly/encryption/blob/master/test/test_rsa_p8.php)
-2. [test_rsa_pkcs12](https://github.com/chanlly/encryption/blob/master/test/test_rsa_p12.php)
-3. [test_rsa_x509](https://github.com/chanlly/encryption/blob/master/test/test_rsa_x509.php)
+1. [test_rsa_pkcs8](https://github.com/calject/encryption/blob/master/test/test_rsa_p8.php)
+2. [test_rsa_pkcs12](https://github.com/calject/encryption/blob/master/test/test_rsa_p12.php)
+3. [test_rsa_x509](https://github.com/calject/encryption/blob/master/test/test_rsa_x509.php)
 
 ### <span id="expand">四、拓展</span> [top](#encryption)
 
 * 查看`openssl`可用加密算法及支持的摘要算法
-    * [test_encrypt_list](https://github.com/chanlly/encryption/blob/master/test/test_encrypt_list.php)
+    * [test_encrypt_list](https://github.com/calject/encryption/blob/master/test/test_encrypt_list.php)
 * aes算法拓展,通过AesFactory::createAes() 输入算法参数，参考
-    * [test_aes](https://github.com/chanlly/encryption/blob/master/test/test_aes.php)
+    * [test_aes](https://github.com/calject/encryption/blob/master/test/test_aes.php)
 
 * 拓展aes实现
-    * 继承`Chanlly\Encryption\Contracts\AbsAesEncryption`抽象类并实现其方法
+    * 继承`Calject\Encryption\Contracts\AbsAesEncryption`抽象类并实现其方法
 
 * 拓展rsa实现
-    * 继承`Chanlly\Encryption\Contracts\AbsRsaEncryption`抽象类并实现其方法
+    * 继承`Calject\Encryption\Contracts\AbsRsaEncryption`抽象类并实现其方法
 
 * 拓展其他算法
-    * 继承`Chanlly\Encryption\Contracts\AbsEncryption`抽象类并实现其方法
+    * 继承`Calject\Encryption\Contracts\AbsEncryption`抽象类并实现其方法
 
 
 
