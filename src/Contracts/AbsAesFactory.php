@@ -9,6 +9,7 @@
 namespace CalJect\Encryption\Contracts;
 
 use CalJect\Encryption\Constants\Openssl;
+use CalJect\Encryption\Providers\AES\AES;
 
 abstract class AbsAesFactory
 {
@@ -26,7 +27,7 @@ abstract class AbsAesFactory
      * @param string $key
      * @param string $iv
      * @param int $opts
-     * @return mixed
+     * @return AES
      */
     final public static function createAesCbc128(string $key, string $iv, int $opts = Openssl::CODING_BASE64)
     {
@@ -37,7 +38,7 @@ abstract class AbsAesFactory
      * @param string $key
      * @param string $iv
      * @param int $opts
-     * @return mixed
+     * @return AES
      */
     final public static function createAesCbc256(string $key, string $iv, int $opts = Openssl::CODING_BASE64)
     {
