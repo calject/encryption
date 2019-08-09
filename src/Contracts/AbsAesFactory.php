@@ -19,7 +19,7 @@ abstract class AbsAesFactory
      * @param int $opts
      * @param string $cipherMode
      * @param string $iv
-     * @return mixed
+     * @return AbsAesEncryption|AES|mixed
      */
     abstract public static function createAes(string $key, int $opts, string $cipherMode, string $iv = "");
     
