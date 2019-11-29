@@ -22,9 +22,8 @@ interface Openssl
     const CODING_HEX_BIN            = 1 << 2;
     
     /* ======== Pkcs padding ======== */
-    const NO_PADDING                = 1 << 6;
-    const PKCS5_PADDING             = 1 << 7;
-    const PKCS7_PADDING             = 1 << 8;
+    const NO_DIGEST                = 1 << 6;
+    const SHA1_DIGEST             = 1 << 7;
     
     /* ======== 加解密编码数据解析 ======== */
     const ENCRYPT_CODING_NO         = 1 << 9;

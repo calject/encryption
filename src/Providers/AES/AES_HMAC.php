@@ -44,7 +44,7 @@ class AES_HMAC extends AbsAesEncryption
         if (!AESEncryptHelper::supported($key, $this->cipherMode)) {
             throw new RuntimeException('The only supported ciphers are AES-128-CBC or -x? and AES-256-CBC or -x? with the correct key lengths.');
         }
-        $this->key = $this->padding()->padding($this->key);
+        $this->key = $this->digest()->digest($this->key);
     }
     
     /**

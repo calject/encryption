@@ -9,11 +9,11 @@
 namespace CalJect\Encryption\Contracts;
 
 
-interface IPadding
+interface IDigest
 {
     /**
      * @param string $str
      * @return string
      */
-    public function padding(string $str): string;
+    public function digest(string $str): string;
 }

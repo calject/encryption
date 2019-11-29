@@ -37,12 +37,12 @@ abstract class AbsEncryption
     /**
      * @var int
      */
-    protected $paddingMode = Openssl::NO_PADDING;
+    protected $digestMode = Openssl::NO_DIGEST;
     
     /**
      * @var int
      */
-    protected $encryptMode = Openssl::NO_PADDING;
+    protected $encryptMode = Openssl::NO_DIGEST;
     
     /**
      * @return ICoding

@@ -9,17 +9,17 @@
 namespace CalJect\Encryption\Components\Padding;
 
 
-use CalJect\Encryption\Contracts\IPadding;
+use CalJect\Encryption\Contracts\IDigest;
 
-class NoPadding implements IPadding
+class SHA1Digest implements IDigest
 {
     
     /**
      * @param string $str
      * @return string
      */
-    public function padding(string $str): string
+    public function digest(string $str): string
     {
-        return $str;
+        return substr(openssl_digest(openssl_digest($str, 'sha1', true), 'sha1', true), 0, 16);
     }
 }

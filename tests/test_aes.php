@@ -8,7 +8,6 @@
 
 use CalJect\Encryption\Constants\Openssl;
 use CalJect\Encryption\Encryption;
-use CalJect\Encryption\Factories\AesFactory;
 
 require "../vendor/autoload.php";
 
@@ -46,12 +45,9 @@ printf("decrypt str: " . $aes->decrypt($encrypted));
 echo PHP_EOL . '</br>';
 echo PHP_EOL . '</br>';
 
-/* ======== with padding Aes加密模式padding主要是对密钥的填充-适配其他语言(java/c等), 默认为Openssl::NO_PADDING ======== */
-/* ======== 如：java中Pkcs7Padding模式的Aes需要使用Openssl::PKCS7_PADDING ======== */
-
 /* ======== coding with Base64 ======== */
-$aes = Encryption::aesFactory()::createAes($key, Openssl::PKCS7_PADDING | Openssl::CODING_BASE64, 'AES-256-ECB');
-$str = 'test aes ecb encryption, coding with base64, key padding with pkcs7 padding.';
+$aes = Encryption::aesFactory()::createAes($key, Openssl::SHA1_DIGEST | Openssl::CODING_BASE64, 'AES-256-ECB');
+$str = 'test aes ecb encryption, coding with base64, key digest with sha1.';
 $encrypted = $aes->encrypt($str);
 printf("encrypt str: " . $encrypted);
 echo PHP_EOL . '</br>';

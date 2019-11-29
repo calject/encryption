@@ -24,7 +24,7 @@ class AES extends AbsAesEncryption
      */
     public function encrypt(string $str, $opts = null): string
     {
-        return $this->coding()->encode(openssl_encrypt($str, $this->cipherMode, $this->padding()->padding($this->key), $opts ?? OPENSSL_RAW_DATA, $this->iv));
+        return $this->coding()->encode(openssl_encrypt($str, $this->cipherMode, $this->digest()->digest($this->key), $opts ?? OPENSSL_RAW_DATA, $this->iv));
     }
     
     /**
@@ -34,7 +34,7 @@ class AES extends AbsAesEncryption
      */
     public function decrypt(string $str, $opts = null): string
     {
-        return openssl_decrypt($this->coding()->decode($str), $this->cipherMode, $this->padding()->padding($this->key), $opts ?? OPENSSL_RAW_DATA, $this->iv);
+        return openssl_decrypt($this->coding()->decode($str), $this->cipherMode, $this->digest()->digest($this->key), $opts ?? OPENSSL_RAW_DATA, $this->iv);
     }
     
 }

@@ -49,7 +49,7 @@ $rsa->setOpts(Openssl::FILE_READ_PUB_PKCS1 | Openssl::CODING_NO | Openssl::ENCRY
 |
 | 2.padding配置(适用于AES加密)
 |   同样可以通过`$rsa->setPaddingMode()` 设置，或者实现`CalJect\Encryption\Contracts\IPadding`接口并通过`$rsa->setPadding()`设置
-|   可选: NO_PADDING、PKCS5_PADDING、PKCS7_PADDING
+|   可选: NO_DIGEST、SHA1_DIGEST
 |
 | 3.加密模式(默认为公钥加密-私钥解密)
 |   可通过设置$rsa->setMode($rsa::MODEL_OPPOSITE / Pkcs12::MODEL_OPPOSITE / Pkcs8::MODEL_OPPOSITE ...);

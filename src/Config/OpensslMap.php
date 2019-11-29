@@ -12,9 +12,8 @@ namespace CalJect\Encryption\Config;
 use CalJect\Encryption\Components\Coding\Base64Coding;
 use CalJect\Encryption\Components\Coding\HexBinCoding;
 use CalJect\Encryption\Components\Coding\NoCoding;
-use CalJect\Encryption\Components\Padding\NoPadding;
-use CalJect\Encryption\Components\Padding\Pkcs5Padding;
-use CalJect\Encryption\Components\Padding\Pkcs7Padding;
+use CalJect\Encryption\Components\Padding\NoDigest;
+use CalJect\Encryption\Components\Padding\SHA1Digest;
 use CalJect\Encryption\Components\Reading\FileReading;
 use CalJect\Encryption\Components\Reading\Pkcs1Reading;
 use CalJect\Encryption\Components\Reading\X509CerReading;
@@ -34,7 +33,7 @@ interface OpensslMap
     const LISTS = [
         self::OPT_KEY_READ          => [Openssl::FILE_KEY, Openssl::FILE_PKEY, Openssl::FILE_PKCS12],
         self::OPT_CODING            => [Openssl::CODING_NO, Openssl::CODING_BASE64, Openssl::CODING_HEX_BIN],
-        self::OPT_PADDING           => [Openssl::NO_PADDING, Openssl::PKCS5_PADDING, Openssl::PKCS7_PADDING],
+        self::OPT_PADDING           => [Openssl::NO_DIGEST, Openssl::SHA1_DIGEST],
         self::OPT_ENCRYPT_CODING    => [Openssl::ENCRYPT_CODING_NO, Openssl::ENCRYPT_CODING_HEX_BIN],
         self::OPT_PUB_FILE_READ     => [Openssl::FILE_READ_PUB_PKCS1, Openssl::FILE_READ_PUB_PKCS8, Openssl::FILE_READ_PUB_X509_CER, Openssl::FILE_READ_PUB_X509_PEM],
         self::OPT_PRI_FILE_READ     => [Openssl::FILE_READ_PRI_PKCS1, Openssl::FILE_READ_PRI_PKCS8, Openssl::FILE_READ_PRI_PKCS12],
@@ -43,17 +42,16 @@ interface OpensslMap
     const CONTACTS = [
         
         /* ======== coding map ======== */
-        Openssl::CODING_NO => NoCoding::class,
-        Openssl::CODING_BASE64 => Base64Coding::class,
-        Openssl::CODING_HEX_BIN => HexBinCoding::class,
+        Openssl::CODING_NO              => NoCoding::class,
+        Openssl::CODING_BASE64          => Base64Coding::class,
+        Openssl::CODING_HEX_BIN         => HexBinCoding::class,
         
-        /* ======== padding map ======== */
-        Openssl::NO_PADDING => NoPadding::class,
-        Openssl::PKCS5_PADDING => Pkcs5Padding::class,
-        Openssl::PKCS7_PADDING => Pkcs7Padding::class,
+        /* ======== digest map ======== */
+        Openssl::NO_DIGEST              => NoDigest::class,
+        Openssl::SHA1_DIGEST            => SHA1Digest::class,
         
         /* ======== encrypt coding map ======== */
-        Openssl::ENCRYPT_CODING_NO => NoCoding::class,
+        Openssl::ENCRYPT_CODING_NO      => NoCoding::class,
         Openssl::ENCRYPT_CODING_HEX_BIN => HexBinCoding::class,
         
     ];
